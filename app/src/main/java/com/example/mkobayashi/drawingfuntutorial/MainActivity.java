@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     private DrawingView drawView;
-    private ImageButton currPaint, drawBtn, eraseBtn;
+    private ImageButton currPaint, drawBtn, eraseBtn, newBtn;
     private float smallBrush, mediumBrush, largeBrush;
 
     @Override
@@ -34,6 +34,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         smallBrush = getResources().getInteger(R.integer.small_size);
         mediumBrush = getResources().getInteger(R.integer.medium_size);
         largeBrush = getResources().getInteger(R.integer.large_size);
+
         drawBtn = (ImageButton)findViewById(R.id.draw_btn);
         drawBtn.setOnClickListener(this);
 
@@ -41,6 +42,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
         eraseBtn = (ImageButton)findViewById(R.id.erase_btn);
         eraseBtn.setOnClickListener(this);
+
+        newBtn = (ImageButton)findViewById(R.id.new_btn);
+        newBtn.setOnClickListener(this);
     }
 
     @Override
@@ -164,6 +168,26 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
             });
 
             brushDialog.show();
+        }
+
+        else if(view.getId()==R.id.new_btn){
+            //new button
+            AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
+            newDialog.setTitle("New drawing");
+            newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
+            newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which){
+                    drawView.startNew();
+                    dialog.dismiss();
+                }
+            });
+            newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which){
+                    dialog.cancel();
+                }
+            });
+
+            newDialog.show();
         }
     }
 }
