@@ -28,7 +28,10 @@ public class DrawingView extends android.view.View {
     private Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
+    // keep track of brush size
     private float brushSize, lastBrushSize;
+    // keep track of if user is erasing or not
+    private boolean erase=false;
 
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -117,5 +120,12 @@ public class DrawingView extends android.view.View {
 
     public float getLastBrushSize(){
         return lastBrushSize;
+    }
+
+    public void setErase(boolean isErase){
+        //set erase true or false
+        erase = isErase;
+        if(erase) drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        else drawPaint.setXfermode(null);
     }
 }
