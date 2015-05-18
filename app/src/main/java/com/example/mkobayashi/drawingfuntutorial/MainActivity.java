@@ -67,6 +67,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     public void paintClicked(View view){
         //use chosen color
+        drawView.setErase(false);
+        drawView.setBrushSize(drawView.getLastBrushSize());
 
         if(view!=currPaint){
             //update color
@@ -95,6 +97,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
                 public void onClick(View v) {
                     drawView.setBrushSize(smallBrush);
                     drawView.setLastBrushSize(smallBrush);
+                    drawView.setErase(false);
                     brushDialog.dismiss();
                 }
             });
@@ -105,16 +108,18 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
                 public void onClick(View v) {
                     drawView.setBrushSize(mediumBrush);
                     drawView.setLastBrushSize(mediumBrush);
+                    drawView.setErase(false);
                     brushDialog.dismiss();
                 }
             });
 
             ImageButton largeBtn = (ImageButton)brushDialog.findViewById(R.id.large_brush);
-            largeBtn.setOnClickListener(new OnClickListener(){
+            largeBtn.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     drawView.setBrushSize(largeBrush);
                     drawView.setLastBrushSize(largeBrush);
+                    drawView.setErase(false);
                     brushDialog.dismiss();
                 }
             });
